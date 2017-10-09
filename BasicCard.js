@@ -1,6 +1,6 @@
 var fs = require('fs');
 var inquirer = require('inquirer');
-var log = require("./log.txt");
+// var log = require("./log.txt");
 
 //This is a basic constructor function that accepts front and back arguments for BasicCard
 
@@ -14,7 +14,7 @@ var BasicCard = function(front, back){
         type: "basic"
       };
 
-    fs.appendFileSync(log, JSON.stringify(data) + ';', "utf8", function(err){
+    fs.appendFile("./log.txt", JSON.stringify(data) + ';', "utf8", function(err){
       if (err) {
         console.log(err);
       }

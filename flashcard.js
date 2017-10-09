@@ -2,7 +2,7 @@ var fs = require("fs");
 var inquirer = require("inquirer");
 var BasicCard = require("./BasicCard.js");
 var ClozeCard = require("./ClozeCard.js");
-var log = require("./log.txt");
+// var log = require("./log.txt");
 
 function LetsBegin(){
   console.log("***************************************************************");
@@ -19,29 +19,55 @@ inquirer
 
     type: "list",
 
-    message: ("Choose the flashcard option you would like to learn from:"),
+    message: ("Choose the flashcard option you would like to execute:"),
 
     choices: [{
-      name: "create-flashcard"
+
+      name: "Create A New Flashcard"
 
     },{
 
-      name: "show-all"
+      name: "Use All"
+
+    },{
+
+      name:"Random Pick"
+
+    },{
+
+      name:"Shuffle The Deck"
+
+    },{
+
+      name: "Show All"
+
+    },{
+
+      name: "Exit"
 
     }]
 
   }])
   .then(function(data){
-    if(data.choose === "create-flashcard"){
+    if(data.choose === "Create A New Flashcard"){
       createCard();
     } else if
-    (data.choose === "show-all"){
-      showAllCards();
-    } else {
-      process.exit();
-    }
-
-});
+    (data.choose === "Use All"){
+      useAll();
+    } else if
+      (data.choose === "Random Pick"){
+        randomPick();
+      } else if
+        (data.choose === "Shuffle The Deck"){
+          shuffleDeck();
+        } else if
+          (data.choose === "Show All"){
+            showAll();
+          } else if
+            (data.choose === "Exit"){
+              process.exit();
+            }
+          });
 
 var createCard = function(){
 inquirer.prompt([{
@@ -49,14 +75,14 @@ inquirer.prompt([{
   message: 'What type of flashcard would you like to create?',
   type: "list",
   choices: [{
-    name: 'basic-flashcard'
+    name: 'A Basic Flashcard'
   },{
-    name: 'cloze-flashcard'
+    name: 'A Cloze Flashcard'
   }]
 
 }])
 .then(function(answer){
-  if(answer.cardType === 'basic-flashcard') {
+  if(answer.cardType === 'A Basic Flashcard') {
     inquirer.prompt([{
       name: "front",
       message: "What is the question you would like to enter?",
@@ -86,7 +112,7 @@ inquirer.prompt([{
       newBasicCard.create();
       upNext();
     });
-  } else if (answer.cardType === "cloze-flashcard"){
+  } else if (answer.cardType === "A Cloze Flashcard"){
     inquirer.prompt([{
       name: 'text',
       message: 'Please provide the full text of your question',
@@ -131,28 +157,28 @@ var upNext = function(){
     message: 'What would you like to do next?',
     type: 'list',
     choices: [{
-      name: 'create-a-new-card'
+      name: 'Create A New Card'
     },{
-      name: 'show-all-of-the-cards'
+      name: 'Show All Cards'
     }, {
-      name: 'exit'
+      name: 'Exit'
     }]
   }])
   .then(function(answer){
-    if(answer.next === 'create-a-new-card'){
+    if(answer.next === 'Create A New Card'){
       createCard();
     } else {
-      if(answer.next === 'show-all-of-the-cards'){
+      if(answer.next === 'Show All Cards'){
         showYourCards();
       } else
-      if(answer.next === "exit"){
+      if(answer.next === "Exit"){
         return;
       }
     }
   });
 
   var showYourCards = function(){
-    fs.readFileSync(log, 'utf8', function(err,data){
+    fs.readFile("./log.txt", 'utf8', function(err,data){
       if (err) {
         console.log(err);
       }

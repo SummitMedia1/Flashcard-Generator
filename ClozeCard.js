@@ -1,6 +1,6 @@
 var fs = require('fs');
 var inquirer = require('inquirer');
-var log = require("./log.txt");
+// var log = require("./log.txt");
 
 function ClozeCard(text, cloze) {
   this.text = text;
@@ -13,7 +13,7 @@ function ClozeCard(text, cloze) {
         clozeDelete: this.clozeDelete,
         type: "cloze"
     };
-  fs.appendFileSync(log, JSON.stringify(data) + ';', "utf8", function(err){
+  fs.appendFile("./log.txt", JSON.stringify(data) + ';', "utf8", function(err){
       if (err) {
         console.log(err);
       }

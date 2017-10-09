@@ -1,7 +1,6 @@
-
-"The Koenigsegg CCXR Trevita automobile sells for": "$4.7 MM",
-"The Lamborghini Veneno sells for": "$4.5 MM",
-"The W Motors Lykan Hypersport sells for": "$3.4 MM",
-"The Limited Edition Bugatti Veyron sells for": "$2.4 MM",
-"The McClaren P1 GTR sells for:": "$2.0 MM"
-{"front":"How are you?","back":"Fine","type":"basic"};{"front":"how do you do?","back":"fine","type":"basic"};
+{"front":"The Koenigsegg CCXR Trevita automobile sells for","back":""$4.7 MM","type":"basic"};
+{"front":"The Lamborghini Veneno sells for","back":"$4.5 MM","type":"basic"};
+{"front":"The W Motors Lykan Hypersport sells for","back":"$3.4 MM","type":"basic"};
+{"front":"The Limited Edition Bugatti Veyron sells for","back":"$2.4 MM","type":"basic"};
+{"front":"The McClaren P1 GTR sells for","back":"$2.0 MM","type":"basic"};
+{"front":"How are you today?","back":"Fine.","type":"basic"};
