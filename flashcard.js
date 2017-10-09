@@ -179,6 +179,36 @@ var showYourCards = function(){
         };
         questions = questions.filter(goodQuestions);
         var count = 0;
-        showYourCards(questions, count);
+        showQuestion(questions, count);
+    });
+};
+
+var showQuestion = function(array, index) {
+    var question = array[index];
+    var parsedQuestion = JSON.parse(question);
+    var questionText;
+    var correctReponse;
+    if (parsedQuestion.type === 'basic') {
+        questionText = parsedQuestion.front;
+        correctReponse = parsedQuestion.back;
+    } else if (parsedQuestion.type === 'cloze') {
+        questionText = parsedQuestion.clozeDeleted;
+        correctReponse = parsedQuestion.cloze;
+    }
+    inquirer.prompt([{
+        name: 'response',
+        message: questionText
+    }]).then(function(answer) {
+        if (answer.response === correctReponse) {
+            console.log('Correct!');
+            if (index < array.length - 1) {
+              showQuestion(array, index + 1);
+            }
+        } else {
+            console.log('Wrong!');
+            if (index < array.length - 1) {
+              showQuestion(array, index + 1);
+            }
+        }
     });
 };
