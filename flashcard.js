@@ -187,25 +187,26 @@ var showQuestion = function(array, index) {
     var question = array[index];
     var parsedQuestion = JSON.parse(question);
     var questionText;
-    var correctReponse;
+    var correctAnswer;
     if (parsedQuestion.type === 'basic') {
         questionText = parsedQuestion.front;
-        correctReponse = parsedQuestion.back;
+        correctAnswer = parsedQuestion.back;
     } else if (parsedQuestion.type === 'cloze') {
-        questionText = parsedQuestion.clozeDeleted;
-        correctReponse = parsedQuestion.cloze;
+        questionText = parsedQuestion.clozeDelete;
+        correctAnswer = parsedQuestion.cloze;
     }
     inquirer.prompt([{
         name: 'response',
         message: questionText
-    }]).then(function(answer) {
-        if (answer.response === correctReponse) {
-            console.log('Correct!');
+    }])
+    .then(function(answer) {
+        if (answer.response === correctAnswer) {
+            console.log('Good Answer!');
             if (index < array.length - 1) {
               showQuestion(array, index + 1);
             }
         } else {
-            console.log('Wrong!');
+            console.log('Bad! Very, very Bad!! Now try again!!!');
             if (index < array.length - 1) {
               showQuestion(array, index + 1);
             }
