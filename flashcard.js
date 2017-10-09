@@ -16,55 +16,46 @@ inquirer
 .prompt
 ([{
     name: "choose",
-
     type: "list",
-
     message: ("Choose the flashcard option you would like to execute:"),
-
     choices: [{
 
       name: "Create A New Flashcard"
-
     },{
 
       name: "Use All"
-
     },{
 
       name:"Random Pick"
-
     },{
 
       name:"Shuffle The Deck"
-
     },{
 
       name: "Show All"
-
     },{
 
       name: "Exit"
-
     }]
 
   }])
-  .then(function(data){
-    if(data.choose === "Create A New Flashcard"){
+  .then(function(response){
+    if(response.choose === "Create A New Flashcard"){
       createCard();
     } else if
-    (data.choose === "Use All"){
+    (response.choose === "Use All"){
       useAll();
     } else if
-      (data.choose === "Random Pick"){
+      (response.choose === "Random Pick"){
         randomPick();
       } else if
-        (data.choose === "Shuffle The Deck"){
+        (response.choose === "Shuffle The Deck"){
           shuffleDeck();
         } else if
-          (data.choose === "Show All"){
-            showAll();
+          (response.choose === "Show All"){
+            showYourCards();
           } else if
-            (data.choose === "Exit"){
+            (response.choose === "Exit"){
               process.exit();
             }
           });
@@ -79,16 +70,15 @@ inquirer.prompt([{
   },{
     name: 'A Cloze Flashcard'
   }]
-
 }])
 .then(function(answer){
   if(answer.cardType === 'A Basic Flashcard') {
     inquirer.prompt([{
       name: "front",
-      message: "What is the question you would like to enter?",
+      message: "Enter a factual question.",
       validate: function(input) {
         if(input === ''){
-          console.log("Please type a question here.");
+          console.log("Please type your question now.");
           return false;
         } else {
           return true;
@@ -101,7 +91,6 @@ inquirer.prompt([{
         if(input === ''){
           console.log('Please provide the answer to your question here');
           return false;
-
         } else {
           return true;
         }
@@ -110,7 +99,7 @@ inquirer.prompt([{
     .then(function(answer){
       var newBasicCard = new BasicCard(answer.front, answer.back);
       newBasicCard.create();
-      upNext();
+      next();
     });
   } else if (answer.cardType === "A Cloze Flashcard"){
     inquirer.prompt([{
@@ -141,17 +130,18 @@ inquirer.prompt([{
       var cloze = answer.cloze;
       if(text.includes(cloze)){
         var newClozeCard = new ClozeCard(text, cloze);
-        ClozeCard();
-        upNext();
+        newClozeCard.create();
+        next();
       } else {
         console.log('The cloze portion that you provided does not exist. Please try typing your cloze again.');
+        createCard();
       }
     });
   }
 });
 };
 
-var upNext = function(){
+var next = function(){
   inquirer.prompt([{
     name: 'next',
     message: 'What would you like to do next?',
@@ -176,48 +166,19 @@ var upNext = function(){
       }
     }
   });
+};
 
-  var showYourCards = function(){
-    fs.readFile("./log.txt", 'utf8', function(err,data){
-      if (err) {
-        console.log(err);
-      }
-      var allQuestions = data.split(';');
-      var validatedQuestions = function(value){
-        return value;
-      };
-      allQuestions = allQuestions.filter(validatedQuestions);
-      var count = 0;
-      showAllQuestions(allQuestions, count);
+var showYourCards = function(){
+    fs.readFile('./log.txt', 'utf8', function(err, data) {
+        if (err){
+            console.log(err);
+        }
+        var questions = data.split(';');
+        var goodQuestions = function(value) {
+            return value;
+        };
+        questions = questions.filter(goodQuestions);
+        var count = 0;
+        showYourCards(questions, count);
     });
-  };
-  var showAllQuestions = function(array, index) {
-      question = array[index];
-      var parsedQuestion = JSON.parse(question);
-      var questionText;
-      var correctReponse;
-      if (parsedQuestion.type === 'basic') {
-          questionText = parsedQuestion.front;
-          correctReponse = parsedQuestion.back;
-      } else if (parsedQuestion.type === 'cloze') {
-          questionText = parsedQuestion.clozeDelete;
-          correctReponse = parsedQuestion.cloze;
-      }
-      inquirer.prompt([{
-          name: 'response',
-          message: questionText
-      }]).then(function(answer) {
-          if (answer.response === correctReponse) {
-              console.log('Correct!');
-              if (index < array.length - 1) {
-                showAllQuestions(array, index + 1);
-              }
-          } else {
-              console.log('Wrong!');
-              if (index < array.length - 1) {
-                showAllQuestions(array, index + 1);
-              }
-          }
-      });
-  };
 };

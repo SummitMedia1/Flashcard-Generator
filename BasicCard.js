@@ -1,6 +1,6 @@
+
 var fs = require('fs');
 var inquirer = require('inquirer');
-// var log = require("./log.txt");
 
 //This is a basic constructor function that accepts front and back arguments for BasicCard
 

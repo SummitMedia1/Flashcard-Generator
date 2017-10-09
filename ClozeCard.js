@@ -1,6 +1,6 @@
+
 var fs = require('fs');
 var inquirer = require('inquirer');
-// var log = require("./log.txt");
 
 function ClozeCard(text, cloze) {
   this.text = text;
