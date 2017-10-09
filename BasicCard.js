@@ -9,12 +9,12 @@ var BasicCard = function(front, back){
   this.back = back;
   this.create = function(){
     var data = {
+        type: "basic",
         front: this.front,
         back: this.back,
-        type: "basic"
       };
 
-    fs.appendFile("./log.txt", JSON.stringify(data) + ';', "utf8", function(err){
+    fs.appendFileSync("./log.txt", JSON.stringify(data) + ';', "utf8", function(err){
       if (err) {
         console.log(err);
       }

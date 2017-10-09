@@ -23,14 +23,14 @@ inquirer
       name: "Create A New Flashcard"
     },{
 
-      name: "Use All"
-    },{
+    //   name: "Use All"
+    // },{
 
-      name:"Random Pick"
-    },{
+    //   name:"Random Pick"
+    // },{
 
-      name:"Shuffle The Deck"
-    },{
+    //   name:"Shuffle The Deck"
+    // },{
 
       name: "Show All"
     },{
@@ -43,15 +43,15 @@ inquirer
     if(response.choose === "Create A New Flashcard"){
       createCard();
     } else if
-    (response.choose === "Use All"){
-      useAll();
-    } else if
-      (response.choose === "Random Pick"){
-        randomPick();
-      } else if
-        (response.choose === "Shuffle The Deck"){
-          shuffleDeck();
-        } else if
+    // (response.choose === "Use All"){
+    //   useAll();
+    // } else if
+    //   (response.choose === "Random Pick"){
+    //     randomPick();
+    //   } else if
+    //     (response.choose === "Shuffle The Deck"){
+    //       shuffleDeck();
+    //     } else if
           (response.choose === "Show All"){
             showYourCards();
           } else if
@@ -174,10 +174,6 @@ var showYourCards = function(){
             console.log(err);
         }
         var questions = data.split(';');
-        var goodQuestions = function(value) {
-            return value;
-        };
-        questions = questions.filter(goodQuestions);
         var count = 0;
         showQuestion(questions, count);
     });
@@ -213,3 +209,8 @@ var showQuestion = function(array, index) {
         }
     });
 };
+
+var randomPick = function(){
+  randomSelection = [Math.floor(Math.random * showQuestion.length)];
+};
+randomPick();
