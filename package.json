@@ -1,0 +1,23 @@
+{
+  "name": "flashcard-generator",
+  "version": "1.0.0",
+  "description": "flashcard generator",
+  "main": "flashcard.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SummitMedia1/Flashcard-Generator.git"
+  },
+  "author": "summitmedia1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SummitMedia1/Flashcard-Generator/issues"
+  },
+  "homepage": "https://github.com/SummitMedia1/Flashcard-Generator#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "inquirer": "^3.3.0"
+  }
+}
