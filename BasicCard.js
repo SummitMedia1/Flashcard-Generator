@@ -13,8 +13,7 @@ var BasicCard = function(front, back){
         front: this.front,
         back: this.back,
       };
-
-    fs.appendFileSync("./log.txt", JSON.stringify(data) + ';', "utf8", function(err){
+    fs.appendFile("./log.JSON", JSON.stringify(data, null, 2) + ',' + '\r\n', function(err){
       if (err) {
         console.log(err);
       }

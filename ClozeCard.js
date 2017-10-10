@@ -1,6 +1,7 @@
 
 var fs = require('fs');
 var inquirer = require('inquirer');
+var clozeArray = [];
 
 function ClozeCard(text, cloze) {
   this.text = text;
@@ -13,7 +14,7 @@ function ClozeCard(text, cloze) {
         cloze: this.cloze,
         clozeDelete: this.clozeDelete
     };
-  fs.appendFileSync("./log.txt", JSON.stringify(data) + ';', "utf8", function(err){
+  fs.appendFile("./log.JSON", JSON.stringify(data, null, 2) + ',' + '\r\n', function(err){
       if (err) {
         console.log(err);
       }

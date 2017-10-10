@@ -43,15 +43,9 @@ inquirer
     if(response.choose === "Create A New Flashcard"){
       createCard();
     } else if
-    // (response.choose === "Use All"){
-    //   useAll();
-    // } else if
-    //   (response.choose === "Random Pick"){
-    //     randomPick();
-    //   } else if
-    //     (response.choose === "Shuffle The Deck"){
-    //       shuffleDeck();
-    //     } else if
+      (response.choose === "Random Pick"){
+        randomPick();
+      } else if
           (response.choose === "Show All"){
             showYourCards();
           } else if
@@ -69,7 +63,7 @@ inquirer.prompt([{
     name: 'A Basic Flashcard'
   },{
     name: 'A Cloze Flashcard'
-  }]
+}]
 }])
 .then(function(answer){
   if(answer.cardType === 'A Basic Flashcard') {
@@ -103,44 +97,34 @@ inquirer.prompt([{
     });
   } else if (answer.cardType === "A Cloze Flashcard"){
     inquirer.prompt([{
+      type: 'input',
       name: 'text',
-      message: 'Please provide the full text of your question',
-      validate: function(input){
-        if(input === ""){
-          console.log("You must provide a question written in its entirety.");
-          return false;
-        } else {
-          return true;
-        }
-      }
+      message: 'Please enter the full text statement.'
     },{
+        type: 'input',
         name: "cloze",
-        message: "Please provide the cloze words to be removed from your question.",
-        validate: function(input){
-          if(input === ''){
-            console.log("You must provide the cloze words from your question before advancing.");
-            return false;
-          } else {
-            return true;
-          }
-        }
+        message: "Please provide the words in your sentence you would like omitted."
+      },{
+        type: 'input',
+        name: 'partial',
+        message: 'Finally, please retype the sentence, replacing the words you provided in your cloze with (...). '
     }])
     .then(function(answer){
-      var text = answer.text;
-      var cloze = answer.cloze;
-      if(text.includes(cloze)){
-        var newClozeCard = new ClozeCard(text, cloze);
-        newClozeCard.create();
-        next();
-      } else {
-        console.log('The cloze portion that you provided does not exist. Please try typing your cloze again.');
-        createCard();
-      }
-    });
-  }
-});
-};
+      newCloze = new ClozeCard(answer.text, answer.cloze, answer.partial);
+      console.log(newCloze);
 
+          fs.appendFile("./log.JSON", JSON.stringify(newCloze)+ '\r\n' , function(err) {
+            if (err) {
+              console.log(err);
+              }
+          });
+        createCard();
+        next();
+
+          });
+        }
+      });
+      };
 var next = function(){
   inquirer.prompt([{
     name: 'next',
@@ -169,7 +153,7 @@ var next = function(){
 };
 
 var showYourCards = function(){
-    fs.readFile('./log.txt', 'utf8', function(err, data) {
+    fs.readFile('./log.JSON', 'utf8', function(err, data) {
         if (err){
             console.log(err);
         }
@@ -209,8 +193,3 @@ var showQuestion = function(array, index) {
         }
     });
 };
-
-var randomPick = function(){
-  randomSelection = [Math.floor(Math.random * showQuestion.length)];
-};
-randomPick();
