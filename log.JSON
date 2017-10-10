@@ -31,5 +31,11 @@
             "type": "basic",
             "front": "I am great",
             "back": "Yes I am"
-          }
+          },
+
+{
+  "type": "basic",
+  "front": "George Washington was our first president.",
+  "back": "Yes he was."
+}
 ]

@@ -14,7 +14,7 @@ function ClozeCard(text, cloze) {
         cloze: this.cloze,
         clozeDelete: this.clozeDelete
     };
-  fs.appendFile("./log.JSON", JSON.stringify(data, null, 2) + ',' + '\r\n', function(err){
+  fs.appendFile("./log.JSON", JSON.stringify(data, null, 2) + ';' + '\r\n', function(err){
       if (err) {
         console.log(err);
       }
