@@ -1,41 +1,43 @@
-[{
-  "type": "basic",
-  "front": "I am wearing gray pants",
-  "back": "Yes"
-},
-{
-  "front":"The Koenigsegg CCXR Trevita automobile sells for",
-  "back":"4.7 MM",
-  "type":"basic"
-},
+[
   {
-    "front":"The Lamborghini Veneno sells for",
-    "back":"4.5 MM",
-    "type":"basic"
+    "front": "The Koenigsegg CCXR Trevita automobile sells for",
+    "back": "4.7 MM",
+    "type": "basic"
   },
-    {
-      "front":"The W Motors Lykan Hypersport sells for",
-      "back":"3.4 MM",
-      "type":"basic"
-    },
-      {
-        "front":"The Limited Edition Bugatti Veyron sells for",
-        "back":"2.4 MM",
-        "type":"basic"
-      },
-        {
-          "front":"The McClaren P1 GTR sells for",
-          "back":"2.0 MM",
-          "type":"basic"},
-          {
-            "type": "basic",
-            "front": "I am great",
-            "back": "Yes I am"
-          },
-
-{
-  "type": "basic",
-  "front": "George Washington was our first president.",
-  "back": "Yes he was."
-}
+  {
+    "front": "The Lamborghini Veneno sells for",
+    "back": "4.5 MM",
+    "type": "basic"
+  },
+  {
+    "front": "The W Motors Lykan Hypersport sells for",
+    "back": "3.4 MM",
+    "type": "basic"
+  },
+  {
+    "front": "The Limited Edition Bugatti Veyron sells for",
+    "back": "2.4 MM",
+    "type": "basic"
+  },
+  {
+    "front": "The McClaren P1 GTR sells for",
+    "back": "2.0 MM",
+    "type": "basic"
+  },
+  {
+    "type": "cloze",
+    "text": "George washington was our first president.",
+    "cloze": "George washington",
+    "clozeDelete": "... was our first president."
+  },
+  {
+    "type": "basic",
+    "front": "Who was the nation's first President?",
+    "back": "George Washington"
+  },
+  {
+    "type": "basic",
+    "front": "Who is the quarterback for the Washington Redskins?",
+    "back": "Kirk Cousins"
+  }
 ]
